@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contact Us | Megs Art{% endblock %}
+{% block body %}
+ {{ app.request.attributes.get('_route') }}
+<div id="gallery-top">
+    <div id="gallery-desc">
+        <h1 class="gallery-title">Contact Us</h1>
+        <p class="description">If you like my art and want to buy some, you can contact us by filling in the form below and clicking on "Submit" button.</p>   
+    </div>
+</div>
+<div id="content" class="clearfix">
+    <div id="left-side">
+        <form>
+            <input type="text" placeholder="Name"/>
+            <input type="text" placeholder="Email Address"/>
+            <input type="text" placeholder="Subject"/>
+            <textarea placeholder="Message"></textarea>
+            <input type="button" value="Submin"/>
+            <input type="button" value="Reset"/>
+        </form>
+    </div>
+    <!-- end #left-area -->
+ {% block rightside %}
+    {{ render(controller('AppBundle:Arts:_rightSide')) }}
+{% endblock %}
+</div>
+ {%endblock%}
+
+

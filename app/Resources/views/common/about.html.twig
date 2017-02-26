@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}About | Megs Art{% endblock %}
+{% block body %}
+ {{ app.request.attributes.get('_route') }}
+<div id="gallery-top">
+    <div id="gallery-desc">
+        <h1 class="gallery-title">About</h1>
+        <p class="description">“Megs Art - Miglena Stoyanova's place for art”</p>   
+    </div>
+</div>
+<div id="content" class="clearfix">
+    <div id="left-side">
+<div class="post">
+            <div class="post-thumbnail">
+                <a href="/contact">
+                    <img src="{{asset('images/about.jpg')}}" class="post-thumb" alt="My portrait" width="300"> 
+                    <span class="post-overlay"></span>
+                </a>
+            </div>
+            <!-- end .post-thumbnail -->
+            <p>some text about me</p>
+        </div>        
+    </div>
+    <!-- end #left-area -->
+ {% block rightside %}
+    {{ render(controller('AppBundle:Arts:_rightSide')) }}
+{% endblock %}   
+</div>
+ {%endblock%}

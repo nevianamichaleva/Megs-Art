@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block title %}Megs Art{% endblock %}
+{% block body %}
+ <div class="flex-container">
+                <div class="flexslider">
+                    <ul class="slides">
+                        {% for art in arts %}
+                        <li>
+                            <a href="/details/{{art.id}}"><img src="{{asset('uploads/arts/')}}{{art.artTitleimage}}"/></a>
+                            <div class="textbox">
+                                <h1>{{art.artTitle}}</h1>
+                                <p>{{art.artDescription}}</p>
+                                <div class="read-more"><a href="/details/{{art.id}}">Read more</a></div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div id="quote">
+                <div id="inner-quote">
+                    <h1>
+                        “Megs Art - Miglena Stoyanova's place for art”
+                    </h1>
+                    <h3>
+                        Look my artworks and buy or place your opinion
+                    </h3>
+                </div>
+            </div>
+            <div id="content-area">
+                <div id="blurbs">
+                    {% for painting in lastThree %}
+                    <div class="blurb">
+                        <h3 class="title">{{painting.artTitle}}</h3>
+                        <div class="blurb-img">
+                            <a href="/details/{{painting.id}}">
+                                <img class="item-image" src="{{asset('uploads/arts/')}}{{painting.artImage}}" alt="{{painting.artTitle}}">
+                                <span class="more-icon"></span>
+                            </a>
+                        </div>
+                        <p>{{painting.artDescription}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div id="from_the_blog">
+                <h3>From The Blog</h3>
+                <ul>
+                    {% for posts in lastSix %}
+                    <li>
+                        <a href="/details/{{posts.id}}">{{posts.artDescription | slice(0, 35)}}...</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="multi-media-bar">
+                <h3 class="title">Multi Media Bar</h3>
+                <div id="et-multi-media">
+                    <a id="left-multi-media" href="#">Previous</a>
+                    <a id="right-multi-media" href="#">Next</a>
+                    <div id="media-slides">
+                        <div class="media-slide">
+                            {% for art in arts %}
+                            <div class="thumb">
+                                <a href="/details/{{art.id}}" rel="media" class="fancybox" title="{{art.artTitle}}">
+                                    <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="multi-media-image" alt="{{art.artTitle}}">
+                                    <span class="more"></span>
+                                </a>
+                                <div class="media-description">
+                                    <p>{{art.artDescription | slice(0,20)}}...</p>
+                                    <span class="media-arrow"></span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- end .thumb -->
+                        </div>
+                        <!-- end .media-slide -->
+                    </div>
+                    <!-- end #media-slides -->
+                </div>
+                <!-- end #et-multi-media -->
+            </div>    
+ {%endblock%}
+
+
