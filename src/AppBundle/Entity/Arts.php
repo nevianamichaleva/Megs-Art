@@ -31,15 +31,22 @@ class Arts
     /**
      * @var string
      *
-     * @ORM\Column(name="art_description", type="string", length=255)
+     * @ORM\Column(name="art_description", type="string", length=1000)
      */
     private $artDescription;
-
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="art_category", type="string", length=80)
+     */
+    private $artCategory;
     /**
      * @var string
      *
      * @ORM\Column(name="art_size", type="string", length=50)
      */
+    
     private $artSize;
 
     /**
@@ -84,7 +91,12 @@ class Arts
      */
     private $artDate;
 
-
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="art_delete", type="datetime")
+     */
+    private $artDelete;
     /**
      * Get id
      *
@@ -310,5 +322,52 @@ class Arts
     {
         return $this->artDate;
     }
-}
 
+    /**
+     * Set artCategory
+     *
+     * @param string $artCategory
+     *
+     * @return Arts
+     */
+    public function setArtCategory($artCategory)
+    {
+        $this->artCategory = $artCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get artCategory
+     *
+     * @return string
+     */
+    public function getArtCategory()
+    {
+        return $this->artCategory;
+    }
+
+    /**
+     * Set artDelete
+     *
+     * @param \DateTime $artDelete
+     *
+     * @return Arts
+     */
+    public function setArtDelete($artDelete)
+    {
+        $this->artDelete = $artDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get artDelete
+     *
+     * @return \DateTime
+     */
+    public function getArtDelete()
+    {
+        return $this->artDelete;
+    }
+}

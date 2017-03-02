@@ -1,22 +1,29 @@
 {% extends 'base.html.twig' %} {% block title %}Gallery | Megs Art{% endblock %} 
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
 {% block body %}
-    {{ app.request.attributes.get('_route') }}
-<div id="gallery-top">
-    <div id="gallery-desc">
-        <h1 class="gallery-title">Gallery</h1>
-        <p class="description">Here you can see my paintings
+<div id="content-top">
+    <div id="content-desc">
+        <h1 class="content-title">{{pageTitle}}</h1>
+        <p class="content-description">{{pageDesc}}
         </p>
-
     </div>
     <!-- end #category-inner -->
 </div>
-<div id="content" class="clearfix">
-    <div id="left-side">
+<div id="content">
+    <div id="content-left-side">
         {% for art in arts %}
         <div class="post">
             <h2 class="title"><a href="#">{{art.artTitle}}</a></h2>
-            <p class="meta-info">Posted by <a>Miglena Stoyanova</a> on {{art.artDate |date("d/m/Y")}} 
-                | <a href="details/{{art.id}}/comments">comments</a>
+            <p class="meta-info">Posted by <a>Miglena Stoyanova</a> on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}}
+                | <a href="details/{{art.id}}/#comments">comments</a>
             <div class="post-thumbnail">
                 <a href="details/{{art.id}}">
                     <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="post-thumb" alt="{{art.artTitle}}" width="186" height="186"> 
@@ -25,7 +32,7 @@
             </div>
             <!-- end .post-thumbnail -->
             <p>{{art.artDescription}}</p>
-            <a href="details/{{art.id}}" class="read-more">Read More</a>
+            <a href="{{router}}/{{art.id}}" class="read-more">Read More</a>
         </div>
             <div class='clearfix'></div>
         <!-- end .post-->

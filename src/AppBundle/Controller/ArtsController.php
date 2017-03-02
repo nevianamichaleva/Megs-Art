@@ -54,7 +54,7 @@ class ArtsController extends Controller {
     }
     
     /**
-     * @Route("/create", name="art_create")
+     * @Route("/create", name="Create")
      */
     public function createAction(Request $request) {
         $art = new Arts;
@@ -122,7 +122,7 @@ class ArtsController extends Controller {
     }
 
     /**
-     * @Route("/delete/{id}", name="art_delete")
+     * @Route("/delete/{id}", name="Delete")
      */
     public function deleteAction($id, Request $request) {
         // replace this example code with whatever you need
@@ -130,7 +130,7 @@ class ArtsController extends Controller {
     }
 
     /**
-     * @Route("/edit/{id}", name="art_edit")
+     * @Route("/edit/{id}", name="Edit")
      */
     public function editAction($id, Request $request) {
         // replace this example code with whatever you need
@@ -139,10 +139,14 @@ class ArtsController extends Controller {
     
     /**
      * @Route("/contact", name="Contact us")
+     * @Route("/contact/{id}", name="Send buy message")
      */
-    public function contactAction() {
+    public function contactAction($id=null) {
         // replace this example code with whatever you need
-        return $this->render('common/contact.html.twig');
+        return $this->render('common/contact.html.twig',
+                [
+                    'id'=>$id
+                ]);
     }
     /**
      * @Route("/about", name="About")
@@ -158,13 +162,37 @@ class ArtsController extends Controller {
         $arts = $this->getDoctrine()
         ->getRepository('AppBundle:Arts')
                 ->findAll();
+        $pageTitle='Gallery';
+        $pageDesc='Here you can see my paintings';
+        $router='details';
+        
         return $this->render('arts/gallery.html.twig',[
-            'arts'=>$arts
+            'arts'=>$arts,
+            'pageTitle'=>$pageTitle,
+            'pageDesc'=>$pageDesc,
+            'router'=>$router
         ]);
     }
-
     /**
-     * @Route("/details/{id}", name="art_details")
+     * @Route("/paintings", name="Paintings for sale")
+     */
+    public function paintingsForSaleAction() {
+        $artsForSale = $this->getDoctrine()
+        ->getRepository('AppBundle:Arts')
+                ->findBy(['artCategory'=>'Paintings for sale']);
+        $pageTitle='Paintings for sale';
+        $pageDesc='Here you can see my paintings for sale';
+        $router='contact';
+        
+        return $this->render('arts/gallery.html.twig',[
+            'arts'=>$artsForSale,
+            'pageTitle'=>$pageTitle,
+            'pageDesc'=>$pageDesc,
+            'router'=>$router
+        ]);
+    }
+    /**
+     * @Route("/details/{id}", name="Details")
      */
     public function detailsAction($id) {
         $artById = $this->getDoctrine()

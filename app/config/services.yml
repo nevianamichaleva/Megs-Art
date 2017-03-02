@@ -10,3 +10,10 @@ services:
 #query_helper_service:
 #          class: AppBundle\Helper\QueryHelper
 #          arguments: ["@service_container"] 
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+parameters:
+    locale: en|fr|de

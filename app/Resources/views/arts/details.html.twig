@@ -1,9 +1,55 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{art.artTitle}} | Megs Art{% endblock %}
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="darkgrey" href="/gallery"> {{ app.request.attributes.get('_route') }}</a></li>
+            <span class="grey">» </span>
+            <li><a class="grey"> {{art.artTitle}}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
 {% block body %}
-DETAILS {{art.artTitle}}
-{{count}} Comments
-{% block rightside %}
-    {{ render(controller('AppBundle:Arts:_rightSide')) }}
-{% endblock %} 
+    <div id="content-top">
+        <div id="content-desc">
+            <h1 class="content-title">{{art.artTitle}}</h1>
+            <p class="content-description">Posted by Miglena Stoyanova on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}} | <a class = "grey" href="/#comments">{{count}} comments</a></p>   
+        </div>
+    </div>
+    <div id="content">
+        <div id="content-left-side">
+            <div id="content-left-side-details">
+                <img src="{{asset('uploads/arts/')}}{{art.artImage}}" alt="{{art.artTitle}}">
+            </div>
+            <p>{{art.artDescription}}</p>
+
+            <div class="clearfix"></div>
+            <div id="comments">
+                <h3 id="comments-title">{{count}} Comments</h3>
+                <ul id="comments-list">
+                    {% for comment in comments %}
+                        <div class="comment-border">
+                            <div class="comments-content"    
+                                 <li>
+                                    <h4>{{comment.userId.userNick}}</h4>
+                                    <div class="comment-img"><img src="{{asset('images/comment.png')}}"></div>
+                                    <div class="comment-date">{{comment.commentDate | localizeddate('long','none')}}</div>
+                                    <p>{{comment.artComment}}</p>
+                                    <div class="comment-replay">
+                                        <a class="read-more">Reply</a>
+                                    </div>
+                                </li>
+                                <div class="comment-arrow"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% block rightside %}
+            {{ render(controller('AppBundle:Arts:_rightSide')) }}
+        {% endblock %} 
+    </div>
 {%endblock%}

@@ -1,19 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block title %}Contact Us | Megs Art{% endblock %}
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
 {% block body %}
- {{ app.request.attributes.get('_route') }}
-<div id="gallery-top">
-    <div id="gallery-desc">
-        <h1 class="gallery-title">Contact Us</h1>
-        <p class="description">If you like my art and want to buy some, you can contact us by filling in the form below and clicking on "Submit" button.</p>   
+<div id="content-top">
+    <div id="content-desc">
+        <h1 class="content-title">Contact Us</h1>
+        <p class="content-description">If you like my art and want to buy some,</p>
+        <p class="content-description">you can contact us by filling in the form below and clicking on "Submit" button.</p>   
     </div>
 </div>
 <div id="content" class="clearfix">
-    <div id="left-side">
+    <div id="content-left-side">
         <form>
             <input type="text" placeholder="Name"/>
             <input type="text" placeholder="Email Address"/>
-            <input type="text" placeholder="Subject"/>
+            <input size="100" type="text" placeholder="Subject" {% if id != null %}value="Buy paintings with art number {{id}}"{% endif %}/>
             <textarea placeholder="Message"></textarea>
             <input type="button" value="Submin"/>
             <input type="button" value="Reset"/>

@@ -51,7 +51,12 @@ class Comments
      */
     private $commentDate;
 
-
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="comment_delete", type="datetime")
+     */
+    private $commentDelete;
     /**
      * Get id
      *
@@ -157,5 +162,28 @@ class Comments
     {
         return $this->commentDate;
     }
-}
 
+    /**
+     * Set commentDelete
+     *
+     * @param \DateTime $commentDelete
+     *
+     * @return Comments
+     */
+    public function setCommentDelete($commentDelete)
+    {
+        $this->commentDelete = $commentDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get commentDelete
+     *
+     * @return \DateTime
+     */
+    public function getCommentDelete()
+    {
+        return $this->commentDelete;
+    }
+}
