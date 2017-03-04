@@ -40,7 +40,7 @@ class Comments
     /**
      * @var string
      *
-     * @ORM\Column(name="at_comment", type="string", length=255)
+     * @ORM\Column(name="art_comment", type="string", length=255)
      */
     private $artComment;
 
@@ -51,12 +51,6 @@ class Comments
      */
     private $commentDate;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="comment_delete", type="datetime")
-     */
-    private $commentDelete;
     /**
      * Get id
      *
@@ -116,21 +110,21 @@ class Comments
     }
 
     /**
-     * Set atComment
+     * Set artComment
      *
-     * @param string $atComment
+     * @param string $artComment
      *
      * @return comments
      */
-    public function setArtComment($atComment)
+    public function setArtComment($artComment)
     {
-        $this->atComment = $artComment;
+        $this->artComment = $artComment;
 
         return $this;
     }
 
     /**
-     * Get atComment
+     * Get artComment
      *
      * @return string
      */
@@ -163,27 +157,4 @@ class Comments
         return $this->commentDate;
     }
 
-    /**
-     * Set commentDelete
-     *
-     * @param \DateTime $commentDelete
-     *
-     * @return Comments
-     */
-    public function setCommentDelete($commentDelete)
-    {
-        $this->commentDelete = $commentDelete;
-
-        return $this;
-    }
-
-    /**
-     * Get commentDelete
-     *
-     * @return \DateTime
-     */
-    public function getCommentDelete()
-    {
-        return $this->commentDelete;
-    }
 }

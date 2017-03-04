@@ -17,7 +17,7 @@
             <li class="recentcomments">
                  <span class="comment-author-link">
                      <a href="/details/{{comment.artId.id}}" rel="external nofollow" class="url">{{comment.artId.artTitle}}: {{comment.artComment}}</a>
-                 </span> on <a href="details/{{comment.artId.id}}/comments">{{comment.userId.userNick}}</a>
+                 </span> on <a href="details/{{comment.artId.id}}/comments">{{comment.userId.userName}}</a>
              </li>
             {% endfor %}
         </ul>
@@ -26,13 +26,14 @@
     <div id="meta-3" class="widget widget_meta">
         <h3 class="title">Meta</h3>
         <ul>
-            <li><a href="/login">Log in</a></li>
-            <li><a href="/register">Register</a></li>
+            {% if not app.user %}<li><a href="/login">Log in</a></li>
+            <li><a href="/register">Register</a></li>{% endif %}
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li><a href="/paintings">Paintings For Sale</a></li>
             <li><a href="/gallery">Gallery</a></li>
+            {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %}
         </ul>
     </div>
     <!-- end .widget -->

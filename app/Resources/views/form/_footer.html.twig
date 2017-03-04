@@ -27,7 +27,7 @@
                         <h4 class="widgettitle">Recent Comments</h4>
                         <ul id="recentcomments">
                             {% for comment in comments %}
-                            <li class="recentcomments"><span class="comment-author-link"><a href="/details/{{comment.artId.id}}" rel="external nofollow" class="url">{{comment.artId.artTitle}}: {{comment.artComment}}</a></span> on <a href="#">{{comment.userId.userNick}}</a></li>
+                            <li class="recentcomments"><span class="comment-author-link"><a href="/details/{{comment.artId.id}}" rel="external nofollow" class="url">{{comment.artId.artTitle}}: {{comment.artComment}}</a></span> on <a href="#">{{comment.userId.userName}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

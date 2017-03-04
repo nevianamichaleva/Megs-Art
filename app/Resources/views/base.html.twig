@@ -50,6 +50,22 @@
                     <li><a href="/contact">Contact Us</a></li>
                     <li><a href="/paintings">Paintings For Sale</a></li>
                     <li><a href="/gallery">Gallery</a></li>
+                    {% if app.user %}
+                    {% if app.user.userRole=='ROLE_ADMIN' %}
+                    <li class="submenu"><a href="#">Administration</a>
+                        <ul id="sub-menu">
+                            <li><a href="/administration/create">Add paintings</a>
+                            <li><a href="/administration/paintings">Paintings</a>
+                            <li><a href="/administration/comments">Comments</a>
+                            <li><a href="/administration/users">Users</a> 
+                        </ul>
+                    </li>
+                    {% endif %}
+                     {% endif %}
+                    {% if not app.user %}<li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>{% endif %}
+                    {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %}
+                   
                 </ul>
             </div>
         </div>
@@ -63,6 +79,9 @@
                     <li><a class="darkgrey" href="/contact">CONTACT US</a></li>
                     <li><a class="darkgrey" href="/paintings">PAINTINGS FOR SALE</a></li>
                     <li><a class="darkgrey" href="/gallery">GALLERY</a></li>
+                    {% if not app.user %}<li><a class="darkgrey" href="/login">LOGIN</a></li>
+                    <li><a class="darkgrey" href="/register">REGISTER</a></li>{% endif %}
+                    {% if app.user %}<li><a class="darkgrey" href="/logout">LOGOUT</a></li>{% endif %}
                 </ul>
             </div>
             {% endblock %}

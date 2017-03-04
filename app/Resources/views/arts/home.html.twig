@@ -4,7 +4,7 @@
  <div class="flex-container">
                 <div class="flexslider">
                     <ul class="slides">
-                        {% for art in arts %}
+                        {% for art in lastSix %}
                         <li>
                             <a href="/details/{{art.id}}"><img src="{{asset('uploads/arts/')}}{{art.artTitleimage}}"/></a>
                             <div class="textbox">
@@ -38,7 +38,7 @@
                                 <span class="more-icon"></span>
                             </a>
                         </div>
-                        <p>{{painting.artDescription}}</p>
+                        <p>{{painting.artDescription| slice(0, 200)}}...</p>
                     </div>
                     {% endfor %}
                 </div>

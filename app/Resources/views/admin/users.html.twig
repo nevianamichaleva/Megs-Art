@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} {% block title %}Users | Megs Art{% endblock %} 
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
+{% block body %}
+<div id="content-top">
+    <div id="content-desc">
+        <h1 class="content-title">{{pageTitle}}</h1>
+        <p class="content-description">{{pageDesc}}
+        </p>
+    </div>
+</div>  
+<div id="content">
+    <ol>
+    {% for user in users %}
+        <li>
+            {{user.userName}}
+            <a href=".users/edit/{{user.id}}">Edit</a> 
+            <a href=".users/delete/{{user.id}}">Delete</a> 
+        </li>
+    {% endfor %}
+    </ol>
+</div>
+{%endblock%}

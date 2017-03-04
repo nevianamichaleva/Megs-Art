@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} {% block title %}Paintings | Megs Art{% endblock %} 
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
+{% block body %}
+<div id="content-top">
+    <div id="content-desc">
+        <h1 class="content-title">{{pageTitle}}</h1>
+        <p class="content-description">{{pageDesc}}
+        </p>
+    </div>
+</div>  
+<div id="content">
+    <ol>
+    {% for art in arts %}
+        <li>
+            <a href="../details/{{art.id}}">{{art.artTitle}}</a> created on {{art.artDate |date("d.m.Y")}}
+            <a href="./edit/{{art.id}}">Edit</a> 
+            <a href="./delete/{{art.id}}">Delete</a> 
+        </li>
+    {% endfor %}
+    </ol>
+</div>
+{%endblock%}

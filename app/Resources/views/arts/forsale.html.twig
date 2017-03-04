@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %} {% block title %}Gallery | Megs Art{% endblock %} 
+{% block pagemenu %}
+    <div id="page">
+        <ul id="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
+{% block body %}
+<div id="content-top">
+    <div id="content-desc">
+        <h1 class="content-title">{{pageTitle}}</h1>
+        <p class="content-description">{{pageDesc}}
+        </p>
+    </div>
+    <!-- end #category-inner -->
+</div>
+<div id="content">
+    <div id="content-left-side">
+        {% for art in arts %}
+        <div class="post">
+            <h2 class="title"><a href="#">{{art.artTitle}}</a></h2>
+            <p class="meta-info">Posted by <a>Miglena Stoyanova</a> on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}}
+                | <a href="details/{{art.id}}/#comments">comments</a>
+            <div class="post-thumbnail">
+                <a href="details/{{art.id}}">
+                    <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="post-thumb" alt="{{art.artTitle}}" width="186" height="186"> 
+                    <span class="post-overlay"></span>
+                </a>
+            </div>
+            <!-- end .post-thumbnail -->
+            <p>Size: <strong>{{art.artSize}} cm.</strong></p>
+            <p>Canvas: <strong>{{art.artCanvas}}</strong></p>
+            <p>Paint: <strong>{{art.artPaint}}</strong></p>
+            <p>Price: <strong>{{art.artPrice|number_format}} BGN</strong></p>
+            <a href="{{router}}/{{art.id}}" class="buy">Buy this art</a>
+        </div>
+            <div class='clearfix'></div>
+        <!-- end .post-->
+        {% endfor %}
+        <div class="wp-pagenavi">
+            <span class="pages">Page 1 of 3</span><span class="current">1</span><a class="page larger" href="https://www.elegantthemes.com/preview/Chameleon/category/blog/page/2/">2</a><a class="page larger" href="https://www.elegantthemes.com/preview/Chameleon/category/blog/page/3/">3</a>
+            <a
+                class="nextpostslink" rel="next" href="https://www.elegantthemes.com/preview/Chameleon/category/blog/page/2/">»</a>
+        </div>
+    </div>
+    <!-- end #left-area -->
+</div>
+{% block rightside %}
+    {{ render(controller('AppBundle:Arts:_rightSide')) }}
+{% endblock %}
+
+{%endblock%}

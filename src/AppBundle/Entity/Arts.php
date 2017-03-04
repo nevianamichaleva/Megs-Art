@@ -52,7 +52,7 @@ class Arts
     /**
      * @var string
      *
-     * @ORM\Column(name="at_canvas", type="string", length=50)
+     * @ORM\Column(name="art_canvas", type="string", length=50)
      */
     private $artCanvas;
 
@@ -91,12 +91,6 @@ class Arts
      */
     private $artDate;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="art_delete", type="datetime")
-     */
-    private $artDelete;
     /**
      * Get id
      *
@@ -345,29 +339,5 @@ class Arts
     public function getArtCategory()
     {
         return $this->artCategory;
-    }
-
-    /**
-     * Set artDelete
-     *
-     * @param \DateTime $artDelete
-     *
-     * @return Arts
-     */
-    public function setArtDelete($artDelete)
-    {
-        $this->artDelete = $artDelete;
-
-        return $this;
-    }
-
-    /**
-     * Get artDelete
-     *
-     * @return \DateTime
-     */
-    public function getArtDelete()
-    {
-        return $this->artDelete;
     }
 }

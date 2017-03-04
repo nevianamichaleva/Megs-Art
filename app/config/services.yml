@@ -15,5 +15,10 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    
+    app.form_login_authenticator:
+        class: AppBundle\Security\FormLoginAuthenticator
+        arguments: ["@router", "@security.password_encoder"]
+        
 parameters:
     locale: en|fr|de

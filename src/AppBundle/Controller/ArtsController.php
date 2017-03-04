@@ -3,14 +3,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Arts;
+use AppBundle\Entity\Comments;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ArtsController extends Controller {
 
@@ -35,106 +36,12 @@ class ArtsController extends Controller {
                 ORDER BY a.artDate DESC");     
                 $querySix ->setMaxResults(6);
                 $lastSix = $querySix->getResult();
-        /*$queryComments = $this->getDoctrine()->getManager()
-                ->createQuery(
-                "SELECT c, u, a 
-                FROM AppBundle\Entity\Comments c
-                JOIN c.userId u
-                JOIN c.artId a
-                ORDER BY c.commentDate DESC");     
-                $queryComments ->setMaxResults(4);
-                $comments = $queryComments->getResult();*/
-        //select * from comments LEFT JOIN users on comments.user_id=users.id left join arts on comments.art_id=arts.id
+        
         return $this->render('arts/home.html.twig', [
                     'arts' => $arts,
                     'lastThree' => $lastThree ,
-                    'lastSix' => $lastSix,
-                    /*'comments' =>$comments*/
+                    'lastSix' => $lastSix,   
         ]);
-    }
-    
-    /**
-     * @Route("/create", name="Create")
-     */
-    public function createAction(Request $request) {
-        $art = new Arts;
-        $form = $this->createFormBuilder($art)
-                ->add('artTitle', TextType::class)
-                ->add('artDescription', TextareaType::class)
-                ->add('artSize', TextType::class)
-                ->add('artCanvas', TextType::class)
-                ->add('artPaint', TextType::class)
-                ->add('artPrice', TextType::class)
-                ->add('artTitleimage', FileType::class)
-                ->add('artImage', FileType::class)
-                ->add('save', SubmitType::class, ['label' => 'Запис'])
-                ->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            //Get Data
-            $artTitle = $form['artTitle']->getData();
-            $artDescription = $form['artDescription']->getData();
-            $artSize = $form['artSize']->getData();
-            $artCanvas = $form['artCanvas']->getData();
-            $artPaint = $form['artPaint']->getData();
-            $artPrice = $form['artPrice']->getData();
-            $artTitleimage = $art->getArtTitleimage();
-            //echo '<pre>', print_r($artTitleimage, 1), '</pre>';
-            $artImage = $art->getArtImage();
-            //echo '<pre>', print_r($artImage, 1), '</pre>';
-
-            $now = new\DateTime('now');
-            $fileTitleimage = md5(uniqid()) . '.' . $artTitleimage->guessExtension();
-            $fileImage = md5(uniqid()) . '.' . $artImage->guessExtension();
-
-            // Move the file to the directory where brochures are stored
-            $artTitleimage->move(
-                    $this->getParameter('artImages_directory'), $fileTitleimage
-            );
-            $artImage->move(
-                    $this->getParameter('artImages_directory'), $fileImage
-            );
-
-            //Set Data
-            $art->setArtTitle($artTitle);
-            $art->setArtDescription($artDescription);
-            $art->setArtSize($artSize);
-            $art->setArtCanvas($artCanvas);
-            $art->setArtPaint($artPaint);
-            $art->setArtPrice($artPrice);
-            $art->setArtTitleimage($fileTitleimage);
-            $art->setArtImage($fileImage);
-            $art->setArtDate($now);
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($art);
-            $em->flush();
-
-            $this->addFlash(
-                    'notice', 'Картината е добавена!'
-            );
-            return $this->redirectToRoute('art_list');
-        }
-        return $this->render('arts/create.html.twig', [
-                    'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/delete/{id}", name="Delete")
-     */
-    public function deleteAction($id, Request $request) {
-        // replace this example code with whatever you need
-        return $this->render('arts/delete.html.twig');
-    }
-
-    /**
-     * @Route("/edit/{id}", name="Edit")
-     */
-    public function editAction($id, Request $request) {
-        // replace this example code with whatever you need
-        return $this->render('arts/edit.html.twig');
     }
     
     /**
@@ -152,7 +59,6 @@ class ArtsController extends Controller {
      * @Route("/about", name="About")
      */
     public function aboutAction() {
-        // replace this example code with whatever you need
         return $this->render('common/about.html.twig');
     }
     /**
@@ -184,7 +90,7 @@ class ArtsController extends Controller {
         $pageDesc='Here you can see my paintings for sale';
         $router='contact';
         
-        return $this->render('arts/gallery.html.twig',[
+        return $this->render('arts/forsale.html.twig',[
             'arts'=>$artsForSale,
             'pageTitle'=>$pageTitle,
             'pageDesc'=>$pageDesc,
@@ -194,7 +100,7 @@ class ArtsController extends Controller {
     /**
      * @Route("/details/{id}", name="Details")
      */
-    public function detailsAction($id) {
+    public function detailsAction($id, Request $request) {
         $artById = $this->getDoctrine()
                 ->getRepository('AppBundle:Arts')
                 ->findOneBy(['id'=>$id]);
@@ -209,11 +115,36 @@ class ArtsController extends Controller {
  
                 $commentsById = $queryComments->getResult();
                 $count = count($commentsById);
-                 
+        //Add comment
+        $comment = new Comments();
+        $form = $this->createFormBuilder($comment)
+                ->add('artComment', TextareaType::class)
+                ->add('save', SubmitType::class, ['label' => 'Запис'])
+                ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Get Data
+            $artComment = $form['artComment']->getData();
+            $now = new\DateTime('now');
+            $userId = $this->get('security.token_storage')->getToken()->getUser();
+            
+            //Set Data
+            $comment->setArtComment($artComment);
+            $comment->setCommentDate($now);
+            $comment->setArtId($artById);
+            $comment->setUserId($userId);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+            
+             return $this->redirect($request->getUri());
+    }
         return $this->render('arts/details.html.twig',[
                 'art'=> $artById,
                 'comments'=>$commentsById,
-                'count'=>$count
+                'count'=>$count,
+                'form' => $form->createView()
                     ]);
     }
     

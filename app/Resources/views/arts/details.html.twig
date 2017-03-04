@@ -15,7 +15,7 @@
     <div id="content-top">
         <div id="content-desc">
             <h1 class="content-title">{{art.artTitle}}</h1>
-            <p class="content-description">Posted by Miglena Stoyanova on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}} | <a class = "grey" href="/#comments">{{count}} comments</a></p>   
+            <p class="content-description">Posted by Miglena Stoyanova on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}} | <a class = "grey" href="#comments">{{count}} comments</a></p>   
         </div>
     </div>
     <div id="content">
@@ -33,12 +33,12 @@
                         <div class="comment-border">
                             <div class="comments-content"    
                                  <li>
-                                    <h4>{{comment.userId.userNick}}</h4>
+                                    <h4>{{comment.userId.userName}}</h4>
                                     <div class="comment-img"><img src="{{asset('images/comment.png')}}"></div>
                                     <div class="comment-date">{{comment.commentDate | localizeddate('long','none')}}</div>
                                     <p>{{comment.artComment}}</p>
                                     <div class="comment-replay">
-                                        <a class="read-more">Reply</a>
+                                        <a href="#respond" class="read-more">Reply</a>
                                     </div>
                                 </li>
                                 <div class="comment-arrow"></div>
@@ -47,6 +47,17 @@
                     {% endfor %}
                 </ul>
             </div>
+                <div id="respond">
+                    <h3 id="respond-title">
+                        Leave a Reply
+                    </h3>
+                    {% if not app.user %}<p>Only registered users may leave a reply</p>
+                    {% else %}
+                        {{form_start(form)}}
+                        {{form_widget(form)}}
+                        {{form_end(form)}}
+                    {% endif %}
+                </div>
         </div>
         {% block rightside %}
             {{ render(controller('AppBundle:Arts:_rightSide')) }}

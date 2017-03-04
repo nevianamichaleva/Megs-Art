@@ -1,24 +1,33 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
+    encoders:
+        # Our user class and the algorithm we'll use to encode passwords
+        # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+        AppBundle\Entity\Users: bcrypt
 
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        # in this example, users are stored via Doctrine in the database
+        # To see the users at src/AppBundle/DataFixtures/ORM/LoadFixtures.php
+        # To load users from somewhere else: http://symfony.com/doc/current/cookbook/security/custom_provider.html
+        database_users:
+            entity: { class: AppBundle:Users, property: userEmail }
+
+    # http://symfony.com/doc/current/book/security.html#firewalls-authentication
+    firewalls:
+         main:
+            anonymous: ~
+            guard:
+                authenticators:
+                    - app.form_login_authenticator
+            logout:
+                path: /logout
+                target: /
+                
     providers:
         in_memory:
-            memory: ~
-
-    firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            memory:
+                users:
+                    admin:
+                        password: $2y$13$jOruJhaYRoQqobOWokJB..kRqNQXHNyDkF9TXyXCx5AB6LnuYR7PG
+                        roles: 'ROLE_ADMIN'
