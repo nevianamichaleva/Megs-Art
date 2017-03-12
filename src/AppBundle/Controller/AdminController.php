@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Arts;
 use AppBundle\Entity\Comments;
+use AppBundle\Entity\Users;
 use AppBundle\Form\ArtType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
+//use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AdminController extends Controller
 {
@@ -35,14 +37,18 @@ class AdminController extends Controller
     /**
      * @Route("/administration/create", name="Create painting")
      * @Security("has_role('ROLE_ADMIN')")
+     * @Method({"GET", "POST"})
      */
     public function createAction(Request $request) {
         
         $art = new Arts;
         $form = $this->createForm(ArtType::class, $art);
+               /* ->add('saveAndCreateNew', SubmitType::class);*/
 
         $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
+             
             //Get Data
             $artTitleimage = $art->getArtTitleimage();
             
@@ -70,13 +76,20 @@ class AdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($art);
             $em->flush();
-            $this->addFlash(
-                    'notice', 'Картината е добавена!'
-            );
+            $this->addFlash('success', 'Картината е добавена!');
+            /*if ($form->get('saveAndCreateNew')->isClicked()) {
+                return $this->redirectToRoute('Create painting');
+            }*/
             return $this->redirectToRoute('Gallery');
         }
+        $pageTitle='Create new painting';
+        $pageDesc='Please fill out required fields';
+        $page = 'Create';
         return $this->render('arts/create.html.twig', [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'pageTitle'=> $pageTitle,
+                    'pageDesc'=> $pageDesc,
+                    'page'=>$page
         ]);
     }
 
@@ -95,10 +108,12 @@ class AdminController extends Controller
                 JOIN c.artId a
                 WHERE c.artId = $id"); 
  
-                $commentsById = $queryComments->getResult();
+        $commentsById = $queryComments->getResult();
                 
         $entityManager->remove($art);
-        $entityManager->remove($commentsById);
+        if ($commentsById) {
+            $entityManager->remove($commentsById);
+        }
         $entityManager->flush();
         $this->addFlash('success', 'Картината и коментарите към нея са изтрити');
 
@@ -121,7 +136,7 @@ class AdminController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+          
         if ($form['artTitleimage']->getData()!=null) {
             $first = $art->getArtTitleimage();
             $artTitleimage = md5(uniqid()) . '.' . $first->guessExtension();  
@@ -148,10 +163,15 @@ class AdminController extends Controller
 
             return $this->redirectToRoute('Edit painting', ['id' => $art->getId()]);
         }
-
-        return $this->render('arts/edit.html.twig', [
+        $pageTitle='Edit painting';
+        $pageDesc='Just change the fields for editing';
+        $page = 'Edit';
+        return $this->render('arts/create.html.twig', [
             'art' => $art,
             'form' => $form->createView(),
+            'pageTitle'=>$pageTitle,
+            'pageDesc'=>$pageDesc,
+            'page'=> $page
         ]);
     }
     
@@ -191,5 +211,33 @@ class AdminController extends Controller
                     'pageTitle'=>$pageTitle,
                     'pageDesc'=>$pageDesc,
         ]);
+    }
+    
+    /**
+     * @Route("/administration/comments/delete/{id}", name="Delete comment")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteCommentAction(Comments $comment, Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
+                
+        $entityManager->remove($comment);
+        $entityManager->flush();
+        $this->addFlash('success', 'Коментарът е изтрит');
+
+        return $this->redirectToRoute('Administration comments');
+    }
+    
+    /**
+     * @Route("/administration/users/delete/{id}", name="Delete user")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteUserAction(Users $user, Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
+                
+        $entityManager->remove($user);
+        $entityManager->flush();
+        $this->addFlash('success', 'Потребителят е изтрит');
+
+        return $this->redirectToRoute('Administration users');
     }
 }

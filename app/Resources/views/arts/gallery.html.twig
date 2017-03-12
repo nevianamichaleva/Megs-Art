@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Gallery | Megs Art{% endblock %} 
 {% block pagemenu %}
-    <div id="page">
-        <ul id="page-menu">
+    <div class="page">
+        <ul class="page-menu">
             <li><a class="darkgrey" href="/">Home</a></li>
             <span class="grey">»</span>
             <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
@@ -26,12 +26,11 @@
                 | <a href="details/{{art.id}}/#comments">comments</a>
             <div class="post-thumbnail">
                 <a href="details/{{art.id}}">
-                    <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="post-thumb" alt="{{art.artTitle}}" width="186" height="186"> 
-                    <span class="post-overlay"></span>
+                    <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="post-thumb" alt="{{art.artTitle}}" width="200"> 
                 </a>
             </div>
             <!-- end .post-thumbnail -->
-            <p>{{art.artDescription}}</p>
+            <p class="indent">{{art.artDescription}}</p>
             <a href="{{router}}/{{art.id}}" class="read-more">Read More</a>
         </div>
             <div class='clearfix'></div>
@@ -44,9 +43,9 @@
         </div>
     </div>
     <!-- end #left-area -->
-</div>
+
 {% block rightside %}
     {{ render(controller('AppBundle:Arts:_rightSide')) }}
 {% endblock %}
-
+</div>
 {%endblock%}

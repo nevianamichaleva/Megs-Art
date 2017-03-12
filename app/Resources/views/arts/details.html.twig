@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{art.artTitle}} | Megs Art{% endblock %}
 {% block pagemenu %}
-    <div id="page">
-        <ul id="page-menu">
+    <div class="page">
+        <ul class="page-menu">
             <li><a class="darkgrey" href="/">Home</a></li>
             <span class="grey">»</span>
             <li><a class="darkgrey" href="/gallery"> {{ app.request.attributes.get('_route') }}</a></li>
@@ -20,11 +20,20 @@
     </div>
     <div id="content">
         <div id="content-left-side">
+            <div class="post">
             <div id="content-left-side-details">
-                <img src="{{asset('uploads/arts/')}}{{art.artImage}}" alt="{{art.artTitle}}">
+                <img id="my-modal" src="{{asset('uploads/arts/')}}{{art.artImage}}" alt="{{art.artTitle}}">
             </div>
-            <p>{{art.artDescription}}</p>
+            <p class="indent">{{art.artDescription}}</p>
 
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
             <div class="clearfix"></div>
             <div id="comments">
                 <h3 id="comments-title">{{count}} Comments</h3>
@@ -53,11 +62,12 @@
                     </h3>
                     {% if not app.user %}<p>Only registered users may leave a reply</p>
                     {% else %}
-                        {{form_start(form)}}
+                        {{ form_start(form, { 'attr' : { 'class': 'custom-form' } }) }}
                         {{form_widget(form)}}
                         {{form_end(form)}}
                     {% endif %}
                 </div>
+        </div>
         </div>
         {% block rightside %}
             {{ render(controller('AppBundle:Arts:_rightSide')) }}

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}About | Megs Art{% endblock %}
 {% block pagemenu %}
-    <div id="page">
-        <ul id="page-menu">
+    <div class="page">
+        <ul class="page-menu">
             <li><a class="darkgrey" href="/">Home</a></li>
             <span class="grey">»</span>
             <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
@@ -10,28 +10,32 @@
     </div>    
 {% endblock %}
 {% block body %}
-<div id="gallery-top">
-    <div id="gallery-desc">
-        <h1 class="gallery-title">About</h1>
-        <p class="description">“Megs Art - Miglena Stoyanova's place for art”</p>   
+    <div id="content-top">
+        <div id="content-desc">
+            <h1 class="content-title">{{pageTitle}}</h1>
+            <p class="content-description">{{pageDesc}}
+            </p>
+        </div>
+        <!-- end #category-inner -->
     </div>
+    <div id="content">
+        <div id="content-left-side">
+            <div class="post">
+                <h2 class="title"><a href="/contact">Miglena Stoyanova</a></h2>
+                <div class="post-thumbnail">
+                    <a href="/contact">
+                        <img src="{{asset('images/about.jpg')}}" class="post-thumb" alt="My portrait" width="300"> 
+                    </a>
+                </div>
+                <!-- end .post-thumbnail -->
+                <p id="content-about" class="indent">Hi, my name is Miglena Stoyanova, and I'm a professional artist, based in Varna, Bulgaria.  I usually create my art with traditional media such as acrylics and oils.
+                    I enjoy working on a wide range of different projects, as such, the pieces on this site are a mix of commissioned work and things I did for fun that I thought were worth putting on the site and selling.
+                </p>
+            </div>        
+        </div>
+        <!-- end #left-area -->
+    {% block rightside %}
+        {{ render(controller('AppBundle:Arts:_rightSide')) }}
+    {% endblock %}   
 </div>
-<div id="content" class="clearfix">
-    <div id="left-side">
-<div class="post">
-            <div class="post-thumbnail">
-                <a href="/contact">
-                    <img src="{{asset('images/about.jpg')}}" class="post-thumb" alt="My portrait" width="300"> 
-                    <span class="post-overlay"></span>
-                </a>
-            </div>
-            <!-- end .post-thumbnail -->
-            <p>some text about me</p>
-        </div>        
-    </div>
-    <!-- end #left-area -->
- {% block rightside %}
-    {{ render(controller('AppBundle:Arts:_rightSide')) }}
-{% endblock %}   
-</div>
- {%endblock%}
+{%endblock%}

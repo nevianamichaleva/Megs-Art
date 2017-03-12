@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Comments | Megs Art{% endblock %} 
 {% block pagemenu %}
-    <div id="page">
-        <ul id="page-menu">
+    <div class="page">
+        <ul class="page-menu">
             <li><a class="darkgrey" href="/">Home</a></li>
             <span class="grey">»</span>
             <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
@@ -9,22 +9,21 @@
     </div>    
 {% endblock %}
 {% block body %}
-<div id="content-top">
-    <div id="content-desc">
-        <h1 class="content-title">{{pageTitle}}</h1>
-        <p class="content-description">{{pageDesc}}
-        </p>
+    <div id="content-top">
+        <div id="content-desc">
+            <h1 class="content-title">{{pageTitle}}</h1>
+            <p class="content-description">{{pageDesc}}
+            </p>
+        </div>
+    </div>  
+    <div id="content">
+        {% for comment in comments %}
+            <div class="publications">
+                <p>For  <a href="/details/{{comment.artId.id}}">{{comment.artId.artTitle}}</a> -- comment: {{comment.artComment}} posted on {{comment.commentDate | date("d.m.Y")}} from {{comment.userId.userName}}<p> 
+                <div>   
+                    <button onclick="location.href = './comments/delete/{{comment.id}}'">Delete</button>  
+                </div>
+            </div>
+        {% endfor %}
     </div>
-</div>  
-<div id="content">
-    <ol>
-    {% for comment in comments %}
-        <li>
-        For  <a href="/details/{{comment.artId.id}}">{{comment.artId.artTitle}}  </a> :{{comment.artComment}} from {{comment.userId.userName}} on {{comment.commentDate | date("d.m.Y")}} 
-        <a href="./comments/edit/{{comment.id}}">Edit</a> 
-            <a href="./comments/delete/{{comment.id}}">Delete</a>  
-        </li>
-    {% endfor %}
-    </ol>
-</div>
 {%endblock%}

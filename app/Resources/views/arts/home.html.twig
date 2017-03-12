@@ -57,18 +57,18 @@
             <div id="multi-media-bar">
                 <h3 class="title">Multi Media Bar</h3>
                 <div id="et-multi-media">
-                    <a id="left-multi-media" href="#">Previous</a>
-                    <a id="right-multi-media" href="#">Next</a>
+                    <a id="left-multi-media">Previous</a>
+                    <a id="right-multi-media">Next</a>
                     <div id="media-slides">
                         <div class="media-slide">
                             {% for art in arts %}
                             <div class="thumb">
                                 <a href="/details/{{art.id}}" rel="media" class="fancybox" title="{{art.artTitle}}">
                                     <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="multi-media-image" alt="{{art.artTitle}}">
-                                    <span class="more"></span>
+                                    <span class="magnifier"><img src="{{asset('images/more.png')}}"</span>
                                 </a>
                                 <div class="media-description">
-                                    <p>{{art.artDescription | slice(0,20)}}...</p>
+                                    <p>{{art.artDescription | slice(0,30)}}...</p>
                                     <span class="media-arrow"></span>
                                 </div>
                             </div>
