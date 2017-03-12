@@ -1,8 +1,36 @@
-{{ form_start(form) }}
-    {{ form_row(form.userName) }}
-    {{ form_row(form.userEmail) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% extends 'base.html.twig' %}
+{% block title %}Register | Megs Art {% endblock %}
+{% block pagemenu %}
+    <div class="page">
+        <ul class="page-menu">
+            <li><a class="darkgrey" href="/">Home</a></li>
+            <span class="grey">»</span>
+            <li><a class="grey"> {{ app.request.attributes.get('_route') }}</a></li>
+        </ul>
+    </div>    
+{% endblock %}
+{% block body %}
+    <div id="content-top">
+        <div id="content-desc">
+            <h1 class="content-title">{{pageTitle}}</h1>
+            <p class="content-description">{{pageDesc}}</p>
+        </div>
+    </div>
+    <div id="content">
+        <div id="content-left-side">
+            <div class="post">  
+                {{ form_start(form, { 'attr' : { 'class': 'custom-form' } }) }}
+                {{ form_row(form.userName, {'attr': {'placeholder': 'Username'}, 'label_attr': {'class':'hidden'} }) }}
+                {{ form_row(form.userEmail, {'attr': {'placeholder': 'Email'}, 'label_attr': {'class':'hidden'} }) }}
+                {{ form_row(form.plainPassword.first, {'attr': {'placeholder': 'Password'}, 'label_attr': {'class':'hidden'} }) }}
+                {{ form_row(form.plainPassword.second, {'attr': {'placeholder': 'Confirm password'} , 'label_attr': {'class':'hidden'} }) }}
+                <button type="submit">Register!</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% block rightside %}
+            {{ render(controller('AppBundle:Arts:_rightSide')) }}
+        {% endblock %}
+    </div>
+{%endblock%}
 
-    <button type="submit">Register!</button>
-{{ form_end(form) }}

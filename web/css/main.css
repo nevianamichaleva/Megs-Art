@@ -59,7 +59,9 @@ a:hover {
 .clearfix {
     clear: both;
 }
-
+.hidden {
+    display:none;
+}
 h1,
 h2,
 h3,
@@ -470,7 +472,6 @@ ul {
 }
 
 .magnifier {
-    opacity: 1;
     position: absolute;
     display: none;
     height: 20px;
@@ -497,6 +498,7 @@ ul {
     font-family: Georgia, serif;
     font-size: 12px;
     color: #929292;
+    text-align: center;
     font-style: italic;
 }
 
