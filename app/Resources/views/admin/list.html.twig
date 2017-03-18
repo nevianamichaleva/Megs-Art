@@ -21,7 +21,7 @@
             <div class="publications">
                 <p><a href="../details/{{art.id}}">{{art.artTitle}}</a> created on {{art.artDate |date("d.m.Y")}}</p>
                 <a href="../details/{{art.id}}"><img src="{{asset('uploads/arts/')}}{{art.artImage}}" alt="{{art.artTitle}}" ></a>
-                <div>
+                <div class="admin-buttons">
                     <button onclick="location.href = './details/{{art.id}}'">View</button> 
                     <button onclick="location.href = './edit/{{art.id}}'">Edit</button> 
                     <button onclick="location.href = './delete/{{art.id}}'">Delete</button> 

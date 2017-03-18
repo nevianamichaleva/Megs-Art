@@ -1,89 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
-    <link href="//fonts.googleapis.com/css?family=Kreon:300,400" rel='stylesheet' type='text/css'>
-    <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel='stylesheet' type='text/css'>
-    <link href="{{ asset('css/fonts.css') }}" rel="stylesheet" type="text/css">
-    {% endblock %}
-</head>
-
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+            <link href="//fonts.googleapis.com/css?family=Kreon:300,400" rel='stylesheet' type='text/css'>
+            <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel='stylesheet' type='text/css'>
+            <link href="{{ asset('css/fonts.css') }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+    </head>
     <body>
-           <div id="container">
-        <div id="header">
-            <div class="logo">
-                <img src="{{ asset('images/logo.png')}}" alt="logo">
-                <h1>Megs Art</h1>
-                <p>ONE OF A KIND ARTWORKS</p>
-            </div>
-            <div id="additional-info">
-                <div id="social">
-                    <ul>
-                        <li>
-                            <a href="#"><img src="{{ asset('images/twitter.png')}}" alt="twitter"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="{{ asset('images/rss.png')}}" alt="linkedin"></a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/Miglena-Stoyanova-Art-1636465023242319/?fref=ts"><img src="{{ asset('images/facebook.png')}}" alt="facebook"></a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="search">
-                    <form id="searchform">
-                        <input type="text" id="searchinput" name="search" placeholder="Search this website...">
-                        <input type="image" id="searchsubmit" src="{{ asset('images/magnifier.png')}}">
-                    </form>
-
-                </div>
-            </div>
-            <div id="navbar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                    <li><a href="/paintings">Paintings For Sale</a></li>
-                    <li><a href="/gallery">Gallery</a></li>
-                    {% if app.user %}
-                    {% if app.user.userRole=='ROLE_ADMIN' %}
-                    <li class="submenu"><a href="#">Administration</a>
-                        <ul id="sub-menu">
-                            <li><a href="/administration/create">Add paintings</a>
-                            <li><a href="/administration/paintings">Paintings</a>
-                            <li><a href="/administration/comments">Comments</a>
-                            <li><a href="/administration/users">Users</a> 
-                        </ul>
-                    </li>
-                    {% endif %}
+     <div id="container">
+         <div id="header">
+             <div class="logo">
+                 <img src="{{ asset('images/logo.png')}}" alt="logo">
+                 <h1>Megs Art</h1>
+                 <p>ONE OF A KIND ARTWORKS</p>
+             </div>
+             <div id="additional-info">
+                 <div id="social">
+                     <ul>
+                         <li>
+                             <a href="#"><img src="{{ asset('images/twitter.png')}}" alt="twitter"></a>
+                         </li>
+                         <li>
+                             <a href="#"><img src="{{ asset('images/rss.png')}}" alt="linkedin"></a>
+                         </li>
+                         <li>
+                             <a href="https://www.facebook.com/Miglena-Stoyanova-Art-1636465023242319/?fref=ts"><img src="{{ asset('images/facebook.png')}}" alt="facebook"></a>
+                         </li>
+                     </ul>
+                 </div>
+                 <div id="search">
+                     <form id="searchform">
+                         <input type="text" id="searchinput" name="search" placeholder="Search this website...">
+                         <input type="image" id="searchsubmit" src="{{ asset('images/magnifier.png')}}">
+                     </form>
+                 </div>
+             </div>
+             <div id="navbar">
+                 <ul>
+                     <li><a href="/">Home</a></li>
+                     <li><a href="/about">About</a></li>
+                     <li><a href="/contact">Contact Us</a></li>
+                     <li><a href="/paintings">Paintings For Sale</a></li>
+                     <li><a href="/gallery">Gallery</a></li>
+                         {% if app.user %}
+                             {% if app.user.userRole=='ROLE_ADMIN' %}
+                             <li class="submenu"><a href="#">Administration</a>
+                                 <ul id="sub-menu">
+                                     <li><a href="/administration/create">Add paintings</a>
+                                     <li><a href="/administration/paintings">Paintings</a>
+                                     <li><a href="/administration/comments">Comments</a>
+                                     <li><a href="/administration/users">Users</a> 
+                                 </ul>
+                             </li>
+                         {% endif %}
                      {% endif %}
-                    {% if not app.user %}<li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>{% endif %}
-                    {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %}
-                   
-                </ul>
-            </div>
-        </div>
+                     {% if not app.user %}<li><a href="/login">Login</a></li>
+                         <li><a href="/register">Register</a></li>{% endif %}
+                         {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %}                  
+                     </ul>
+                 </div>
+             </div>           
         <div class="clearfix"></div>
         <div id="wrapper">
             {% block pagemenu %}
-            <div class="page page-base">
-                <ul id="page-menu">
-                    <li><a class="darkgrey" href="/">HOME</a></li>
-                    <li><a class="darkgrey" href="/about">ABOUT</a></li>
-                    <li><a class="darkgrey" href="/contact">CONTACT US</a></li>
-                    <li><a class="darkgrey" href="/paintings">PAINTINGS FOR SALE</a></li>
-                    <li><a class="darkgrey" href="/gallery">GALLERY</a></li>
-                    {% if not app.user %}<li><a class="darkgrey" href="/login">LOGIN</a></li>
-                    <li><a class="darkgrey" href="/register">REGISTER</a></li>{% endif %}
-                    {% if app.user %}<li><a class="darkgrey" href="/logout">LOGOUT</a></li>{% endif %}
-                </ul>
-            </div>
+                <div class="page page-base">
+                    <ul id="page-menu">
+                        <li><a class="darkgrey" href="/">HOME</a></li>
+                        <li><a class="darkgrey" href="/about">ABOUT</a></li>
+                        <li><a class="darkgrey" href="/contact">CONTACT US</a></li>
+                        <li><a class="darkgrey" href="/paintings">PAINTINGS FOR SALE</a></li>
+                        <li><a class="darkgrey" href="/gallery">GALLERY</a></li>
+                        {% if not app.user %}<li><a class="darkgrey" href="/login">LOGIN</a></li>
+                            <li><a class="darkgrey" href="/register">REGISTER</a></li>{% endif %}
+                            {% if app.user %}<li><a class="darkgrey" href="/logout">LOGOUT</a></li>{% endif %}
+                        </ul>
+                    </div>
+                </div>
             {% endblock %}
     {% block body %}
         
@@ -97,5 +95,6 @@
     <script type="text/javascript" src="{{ asset('js/main.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/mymodal.js')}}"></script>
 {% endblock %}
+</div>
 </body>
 </html>

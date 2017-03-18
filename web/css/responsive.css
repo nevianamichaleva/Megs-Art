@@ -1,0 +1,94 @@
+@media only screen and ( max-width: 479px) {
+    #container {
+        width: 300px;
+    }
+    .flex-container, #additional-info, #search, #navbar, #page-menu,
+    #from_the_blog, #multi-media-bar, #footer-widgets, #right-side,
+    #content-desc .content-description, .meta-info 
+    {
+        display:none;
+    }
+   
+    .page-base {
+        background-image: none;
+    }
+    #footer-content, #wrapper, #content-top, #content, #content-left-side, .post {
+        width: 24.833em;
+    }
+    #copyright {
+        display: block;
+        padding: 20px 10px;
+        text-align: center;
+    }
+    #notes {
+        margin: 0 0 0 23px;
+    }
+    .note {
+        margin-bottom: 45px; 
+    }
+    .note .title, .post .title {
+        text-align: center;
+        margin: 0;
+        padding: 0 0 15px 0;
+    }
+
+    .note p {
+        width: 20em;
+        text-align: center;
+        margin-top: 15px;
+    }
+    #content {
+        margin: 0;
+        padding: 0;
+    }
+    #content-left-side-details img {
+        max-height: 20em;
+        max-width: 20em;
+    }
+    #content-left-side p {
+        width: 21.5em;
+    }
+    #content-left-side {
+        margin: 18px;
+    }
+    .post textarea {
+        width: 240px;
+    }
+    .post {
+        padding:0;
+    }
+    .post .title {
+        margin-left: -36px;
+    }
+    .post-thumbnail {
+        margin: 0 10px 10px 27px;
+    }
+    .meta-info {
+        width: 15em;
+    }
+    .post a.read-more {
+            margin: 0 50px 15px 0;
+    }
+    .post-sale-info {
+       text-align: center;
+       margin-bottom:20px;
+    }
+    .post-thumb {
+        width: 206px;
+    }
+    #content-about {
+        display: flex; 
+    }
+    
+    .publications button {
+        width: 35%;
+    }
+}
+@media only screen and ( max-width: 767px) {
+}
+@media only screen and ( max-width: 960px) {
+
+}
+@media only screen and ( min-width: 768px) and ( max-width: 960px) {
+
+}
