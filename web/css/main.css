@@ -33,7 +33,6 @@ body {
     color: #929292;
     padding-top: 4em;
     padding-bottom: 8.167em;
-    background: #f4f4f4 url(../images/body-bg.png);
 }
 
 a {
@@ -1279,8 +1278,9 @@ h5, h6 {
 #control-close img {
     width: 34px;
     position: absolute;
-    left: 5px;
+    left: 0;
     top: 111px;
+    z-index: 1000;
 }
 #control-panel-close img {
     width: 38px;
