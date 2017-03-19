@@ -3,6 +3,16 @@
          animation: 'fade',
          controlsContainer: '.flexslider'
      });
+     $("#control-close").click(function(){
+         $(".control-panel").toggle("slide", { direction: "left" }, 1000);
+     });
+      $("#control-panel-close").click(function(){
+         $(".control-panel").toggle("slide", { direction: "left" }, 1000);
+     });
+     $(".control-panel a").click(function(ev){
+         imageUrl = '../images/'+ev.target.id+'.png';
+         $("body").css('background-image', 'url(' + imageUrl + ')');
+     });
      $nav=$("#nav-main").html();
      $("#nav-mobile").html($nav);
     $("#nav-trigger span").click(function () {

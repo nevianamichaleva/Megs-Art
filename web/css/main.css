@@ -33,7 +33,7 @@ body {
     color: #929292;
     padding-top: 4em;
     padding-bottom: 8.167em;
-    background: #f4f4f4 url(../images/body.png);
+    background: #f4f4f4 url(../images/body-bg.png);
 }
 
 a {
@@ -1242,4 +1242,97 @@ a.buy:hover {
 /*Admin*/
 .admin-links {
     display: none
+}
+
+/*Control panel*/
+.note-back {
+    display: block;
+    width: 29px;
+    height: 29px;
+    position: relative;
+    float: left;
+    margin: 0 4px 4px 0;
+    text-indent: -9999px;
+    z-index: 9999;
+    border: 1px solid grey;
+    margin: 5px;
+}
+.control-panel {
+    display:none;
+    position: fixed;
+    left: 0px;
+    top: 94px;
+    width: 169px;
+    z-index: 9000;
+    color: #9f9f9f;
+    text-shadow: 1px 1px 1px #fff;
+    background-color: #f4f4f4;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+     box-shadow: 3px 3px 1px #cecece;
+}
+h5, h6 {
+    text-align: center;
+}
+#control-close img {
+    width: 34px;
+    position: absolute;
+    left: 5px;
+    top: 111px;
+}
+#control-panel-close img {
+    width: 38px;
+    position: absolute;
+    right: -39px;
+    top: 13px;
+}
+.control-panel #body-bg {
+   background: url(../images/body-bg.png); 
+}
+.control-panel #body-bg1 {
+   background: url(../images/body-bg1.png); 
+}
+.control-panel #body-bg2 {
+   background: url(../images/body-bg2.png); 
+}
+.control-panel #body-bg3 {
+   background: url(../images/body-bg3.png); 
+}
+.control-panel #body-bg4 {
+   background: url(../images/body-bg4.png); 
+}
+.control-panel #body-bg5 {
+   background: url(../images/body-bg5.png); 
+}
+.control-panel #body-bg6 {
+   background: url(../images/body-bg6.png); 
+}
+.control-panel #body-bg7 {
+   background: url(../images/body-bg7.png); 
+}
+.control-panel #body-bg8 {
+   background: url(../images/body-bg8.png); 
+}
+.control-panel #body-bg9 {
+   background: url(../images/body-bg9.png); 
+}
+.control-panel #body-bg10 {
+   background: url(../images/body-bg10.png); 
+}
+.control-panel #body-bg11 {
+   background: url(../images/body-bg11.png); 
+}
+.control-panel #body-bg12 {
+   background: url(../images/body-bg12.png); 
+}
+.control-panel #body-bg13 {
+   background: url(../images/body-bg13.png); 
+}
+.control-panel #body-bg14 {
+   background: url(../images/body-bg14.png); 
+}
+.control-panel #body-bg15 {
+   background: url(../images/body-bg15.png); 
 }
