@@ -1,14 +1,227 @@
-@media only screen and ( max-width: 479px) {
+@media only screen and ( min-width: 768px) and ( max-width: 960px) {
     #container {
-        width: 300px;
+        width: 750px;
     }
-    .flex-container, #additional-info, #search, #navbar, #page-menu,
+    .textbox {
+        height: 188px;
+        top: -26px;
+        right: 49px;
+    }
+    #page-menu, #from_the_blog   {
+        display: none;
+    }
+    #footer .recent:last-of-type {
+        max-width: 130px;
+    }
+    .recent {
+        padding-left: 2em;
+    }
+    #footer-content, #content-top {
+        width: 748px;
+    }
+    .page-base {
+        background: none;
+        border:none;
+    }
+    #nav-main {
+        margin-top: 15px
+    }
+    #multi-media-bar {
+        padding: 0 57px;
+    }
+    #content {
+        padding: 0;
+    }
+    #right-side {
+        width: 8.833em;
+        float: left;
+        padding-top: 2.917em;
+        padding-left: 1.333em;
+        border-left: 0.083em solid #f0f0f0;
+        margin-left: -0.083em;
+    }
+    #recentcomments {
+        width:100px;
+    }
+    #copyright {
+        justify-content: center;
+        margin-top: 17px;
+    }
+    .post {
+        padding: 2.667em;
+    }
+}
+
+@media only screen and ( max-width: 767px) {
+    #container {
+        width: 460px;
+    }
+    .textbox, #additional-info, #search, #nav-main, #page-menu,
     #from_the_blog, #multi-media-bar, #footer-widgets, #right-side,
     #content-desc .content-description, .meta-info 
     {
         display:none;
     }
-   
+    nav#nav-mobile, #nav-trigger 
+    {
+        display: block; 
+    }
+    .logo {
+        position: absolute;
+        right: 159px;
+        top: 13px;
+    }
+    #nav-trigger {
+        position: absolute;
+        top: 35px;
+        left: 108px;
+        z-index: 1999;
+    }
+    #footer-content, #wrapper, #content-top, #content, #content-left-side, .post {
+        width: 458px;
+    } 
+
+    .note {
+        float: none;
+        width: auto;
+    }
+    .note .title {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    .note-img {
+        display:block;
+        margin:auto;
+        margin-bottom: 12px;
+    }
+
+    #notes {
+        margin: 0 0 0 2.167em;
+    }
+    .page-base {
+        background: none;
+        border:none;
+    }
+    .page {
+        margin-top: 12px;
+    }
+    #content-about {
+        display: flex; 
+    }
+    #copyright {
+        display: block;
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .note {
+        margin-bottom: 45px; 
+    }
+    .post .title {
+        text-align: center;
+        margin: 0;
+        padding: 0 0 15px 0;
+    }
+
+    #content {
+        margin: 0;
+        padding: 0;
+    }
+    #content-left-side-details img {
+        max-height: 20em;
+        max-width: 20em;
+    }
+    #content-left-side-details {
+        margin: 1px 77px 18px;
+    }
+    .post p {
+        width: 31.5em;
+        padding-bottom: 0.833em;
+        line-height: 1.8em;
+        padding-left: 19px;
+        padding-top: 10px;
+    }
+    #content-left-side {
+        margin: 18px;
+    }
+    .post textarea {
+        width: 407px;
+    }
+    .post {
+        padding:0;
+    }
+    .post .title {
+        margin-left: -36px;
+    }
+    .post-thumbnail {
+        margin: 0 100px 9px 107px;
+    }
+    .meta-info {
+        width: 15em;
+    }
+    .post a.read-more {
+        margin: 0 50px 15px 0;
+    }
+    .post-sale-info {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    .post-thumb {
+        width: 206px;
+    }
+    #content-about {
+        width: 380px;
+    }
+
+    .publications button {
+        width: 35%;
+    }
+
+    .post-thumbnail-about {
+        margin-left: 43px;
+        margin-bottom: 15px;
+    }
+    .post-about .title{
+        text-align: center;
+    }
+
+}
+
+@media only screen and ( max-width: 479px) {
+    .logo {
+        position: absolute;
+        right: 74px;
+        top: 20px;
+    }
+    nav#nav-mobile {
+        top: 96px;
+    }
+    #container {
+        width: 300px;
+    }
+    .flex-container, #additional-info, #search, #nav-main, #page-menu,
+    #from_the_blog, #multi-media-bar, #footer-widgets, #right-side,
+    #content-desc .content-description, .meta-info 
+    {
+        display:none;
+    }
+    #nav-trigger {
+        left: 43px;
+        top: 60px;
+    }
+    #header {
+        height: 94px;
+    }
+    #content-area
+    {
+        margin-top: -109px;
+    }
+    #quote {
+        position: relative;
+        top: -91px;
+        background: none;
+    }
     .page-base {
         background-image: none;
     }
@@ -41,18 +254,21 @@
         margin: 0;
         padding: 0;
     }
+    #content-left-side-details {
+        margin:0 0 15px 0;
+    }
     #content-left-side-details img {
         max-height: 20em;
         max-width: 20em;
     }
-    #content-left-side p {
-        width: 21.5em;
+    .post p {
+        width: 19.5em;
     }
     #content-left-side {
         margin: 18px;
     }
     .post textarea {
-        width: 240px;
+        width: 248px;
     }
     .post {
         padding:0;
@@ -61,17 +277,17 @@
         margin-left: -36px;
     }
     .post-thumbnail {
-        margin: 0 10px 10px 27px;
+        margin: 0 23px 10px 27px;
     }
     .meta-info {
         width: 15em;
     }
     .post a.read-more {
-            margin: 0 50px 15px 0;
+        margin: 0 50px 15px 0;
     }
     .post-sale-info {
-       text-align: center;
-       margin-bottom:20px;
+        text-align: center;
+        margin-bottom:20px;
     }
     .post-thumb {
         width: 206px;
@@ -79,16 +295,26 @@
     #content-about {
         display: flex; 
     }
-    
+
     .publications button {
         width: 35%;
     }
-}
-@media only screen and ( max-width: 767px) {
-}
-@media only screen and ( max-width: 960px) {
-
-}
-@media only screen and ( min-width: 768px) and ( max-width: 960px) {
-
+    .custom-form button {
+        width: 30%;
+    }
+    .post-about {
+        padding: 0;
+    }
+    .post-thumbnail-about {
+        margin: 0;
+    }
+    #content-about {
+        width: 263px;
+    }
+    .post-thumbnail-about img {
+        width: 265px;
+    }
+    .page {
+        margin: 0;
+    }
 }

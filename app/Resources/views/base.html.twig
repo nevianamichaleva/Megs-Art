@@ -41,14 +41,17 @@
                      </form>
                  </div>
              </div>
-             <div id="navbar">
+             <div id="nav-main">
                  <ul>
                      <li><a href="/">Home</a></li>
                      <li><a href="/about">About</a></li>
                      <li><a href="/contact">Contact Us</a></li>
                      <li><a href="/paintings">Paintings For Sale</a></li>
                      <li><a href="/gallery">Gallery</a></li>
-                         {% if app.user %}
+                     {% if not app.user %}<li><a href="/login">Login</a></li>
+                         <li><a href="/register">Register</a></li>{% endif %}
+                         {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %} 
+                                              {% if app.user %}
                              {% if app.user.userRole=='ROLE_ADMIN' %}
                              <li class="submenu"><a href="#">Administration</a>
                                  <ul id="sub-menu">
@@ -60,11 +63,12 @@
                              </li>
                          {% endif %}
                      {% endif %}
-                     {% if not app.user %}<li><a href="/login">Login</a></li>
-                         <li><a href="/register">Register</a></li>{% endif %}
-                         {% if app.user %}<li><a href="/logout">Logout</a></li>{% endif %}                  
                      </ul>
                  </div>
+                     <div id="nav-trigger">
+                         <img src="{{ asset('images/down_arrow.png')}}"/><span>Navigation</span>
+                     </div>
+                     <nav id="nav-mobile"></nav>    
              </div>           
         <div class="clearfix"></div>
         <div id="wrapper">

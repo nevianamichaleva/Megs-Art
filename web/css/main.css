@@ -226,31 +226,103 @@ p {
 
 /*Navigation*/
 
-#navbar {
+#nav-main {
     float: right;
 }
 
-#navbar ol,
+#nav-main ol,
 ul {
     list-style: none;
 }
 
-#navbar li {
+#nav-main li {
     float: left;
     display: block;
     padding: 0px 9px;
     position: relative;
 }
 
-#navbar li a {
+#nav-main li a {
     font-size: 1.250em;
     font-family: 'Kreon', Arial, sans-serif;
     color: #393939;
     text-decoration: none;
 }
 
-#navbar li a:hover {
+#nav-main li a:hover {
     color: #427d8b;
+}
+#nav-trigger {
+    display: none;
+    text-align: center;
+    position: relative;
+    padding: 12px 26px 12px 53px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.500em;
+    text-shadow: 1px 1px 0 #fff;
+    color: #808080;
+}
+#nav-trigger span {
+    display: inline-block;
+    padding: 10px 30px;
+    cursor: pointer;
+    width: 17px;
+    height: 11px;
+    position: absolute;
+    top: 40px;
+    left: 47px;  
+}
+#nav-trigger img {
+    position: absolute;
+    top: 56px;
+    left: 59px;
+    z-index: 99;
+}
+
+nav#nav-mobile {
+    position: relative;
+    display: none;
+    box-shadow: inset 0px 0px 1px 1px #fff;
+    top: 58px;
+    text-align: center;
+    z-index: 1000;
+    padding: 15px 0 9px;
+}
+
+nav#nav-mobile #sub-menu {
+    position: absolute;
+    left: -833.25em;
+}
+
+nav#nav-mobile ul {
+    display: none;
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #f9f9f9;
+    font-family: 'Georgia';
+    font-size: 15px;
+    border: 0.083em solid #efefef;
+    border-radius: 5px;
+}
+nav#nav-mobile li {
+    display: block;
+    padding: 5px 0;
+    margin: 0 5px;
+    border-bottom: 1px solid #efefef;
+}
+nav#nav-mobile li:last-child {
+    border-bottom: none; 
+}
+nav#nav-mobile a {
+    display: block;
+    color: #808080;
+    padding: 10px 30px; 
 }
 
 .page {
@@ -282,7 +354,7 @@ ul {
     margin-left:0.833em;
 }
 #sub-menu {
-   position: absolute;
+    position: absolute;
     left: -833.25em;
     width: 12.5em;
     background: #fff;
@@ -295,7 +367,7 @@ ul {
     position: absolute;
 }
 .submenu:hover > #sub-menu {
-     left: 0;
+    left: 0;
     float: left;
 }
 
@@ -325,6 +397,7 @@ ul {
     width: 22.5em;
     height: 22.5em;
     margin-right: 2.5em;
+    margin-bottom: 1em;
 }
 
 .note .title {
@@ -334,12 +407,12 @@ ul {
 }
 
 .note p {
-     padding-bottom: 0.833em;
+    padding-bottom: 0.833em;
     margin-left: 0.417em;
 }
 
 .note-img {
-   width: 20em;
+    width: 20em;
     height: 10em;
     padding: 0.417em;
     border: 0.167em solid rgb(234, 234, 225);
@@ -578,7 +651,7 @@ html[xmlns] .slides {
 }
 
 .flex-direction-nav a {
-     display: block;
+    display: block;
     position: absolute;
     margin: -1.417em 0 0 0;
     width: 2.917em;
@@ -783,7 +856,7 @@ html[xmlns] .slides {
 }
 
 .recent {
-        width: 20%;
+    width: 20%;
     padding-left: 3.333em;
     float: left;
     color: #929292;
@@ -840,7 +913,7 @@ html[xmlns] .slides {
 }
 
 #content {
-   padding-left:4.167em;
+    padding-left:4.167em;
 }
 .content-title {
     color: #1d1d1d;
@@ -918,6 +991,20 @@ h2.title a {
     text-decoration: none;
 }
 .post-thumbnail {
+    display: block;
+    float: left;
+    position: relative;
+    margin-right: 2.917em;
+    margin-top: 0.5em;
+}
+.post-about {
+    padding:1.667em;
+}
+.post-about .indent {
+    text-indent: 1.667em;
+    text-align: justify;
+}
+.post-thumbnail-about {
     display: block;
     float: left;
     position: relative;
