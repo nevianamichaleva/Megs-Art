@@ -22,8 +22,11 @@
             <div class="post">
                 <form class="custom-form">
                     {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.subject, (id is null ? {'attr': {'placeholder': 'Subject'} } : {'attr':{'value': 'Buy paintings with art number: ' ~id}})) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.message) }}
+                    {{ form_widget(form) }} 
                     <div class="clearfix"></div>
                     <button type="submit">Submit</button> 
                     {{ form_end(form) }}

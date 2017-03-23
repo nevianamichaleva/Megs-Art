@@ -172,6 +172,10 @@ p {
 #social ul {
     list-style: none;
     display: inline-flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: -o-flex;
 }
 
 #search {
@@ -334,6 +338,10 @@ nav#nav-mobile a {
 .page ul {
     list-style: none;
     display: inline-flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: -o-flex;
 }
 
 .page ul li {
@@ -1335,4 +1343,36 @@ h5, h6 {
 }
 .control-panel #body-bg15 {
    background: url(../images/body-bg15.png); 
+}
+/* Alerts */
+.alert-success {
+    padding: 20px;
+    margin-bottom: 15px;
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    max-width: 80em;
+    border-radius: 9px;
+}
+.alert-error {
+    padding: 20px;
+    margin-bottom: 15px;
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    max-width: 80em;
+    border-radius: 9px;
+}
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.closebtn:hover {
+    color: black;
 }

@@ -20,23 +20,25 @@ class ContactType extends AbstractType
             ->add('name', TextType::class, array('attr' => array('placeholder' => 'Your name'),
                 'constraints' => array(
                     new NotBlank(array("message" => "Please provide your name")),
-                )
+                ),
+                'label' => false
             ))
             ->add('subject', TextType::class, array('attr' => array('placeholder' => 'Subject'),
                 'constraints' => array(
                     new NotBlank(array("message" => "Please give a Subject")),
-                )
+                ),
+                'label' => false
             ))
             ->add('email', EmailType::class, array('attr' => array('placeholder' => 'Your email address'),
                 'constraints' => array(
                     new NotBlank(array("message" => "Please provide a valid email")),
                     new Email(array("message" => "Your email doesn't seems to be valid")),
-                )
+                ), 'label' => false
             ))
             ->add('message', TextareaType::class, array('attr' => array('placeholder' => 'Your message here'),
                 'constraints' => array(
                     new NotBlank(array("message" => "Please provide a message here")),
-                )
+                ), 'label' => false
             ))
         ;
     }

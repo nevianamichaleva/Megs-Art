@@ -1,11 +1,11 @@
 $(document).ready(function () {
  
     var currentColor = localStorage.getItem('background') ? localStorage.getItem('background') : '../images/body-bg.png';
-    
-    
         $("body").css('background-image', 'url(' + currentColor + ')');
-    
-    
+    $('.closebtn').click(function(){
+        $(this).parent().css('display','none');
+    });
+
     $('.flexslider').flexslider({
         animation: 'fade',
         controlsContainer: '.flexslider'

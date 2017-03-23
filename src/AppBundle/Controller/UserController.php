@@ -35,8 +35,7 @@ class UserController extends Controller {
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            $this->addFlash('success', 'You have successfully registered!');
 
             return $this->redirectToRoute('Login');
         }

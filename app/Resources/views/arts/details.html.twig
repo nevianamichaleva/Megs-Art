@@ -62,7 +62,7 @@
                     </h3>
                     {% if not app.user %}<p>Only registered users may leave a reply, please <a href="/login">login</a> or <a href="/register">register</a></p>
                     {% else %}
-                        {{ form_start(form, { 'attr' : { 'class': 'custom-form' } }) }}
+                        {{form_start(form, { 'attr' : { 'class': 'custom-form' } }) }}
                         {{form_widget(form)}}
                         {{form_end(form)}}
                     {% endif %}

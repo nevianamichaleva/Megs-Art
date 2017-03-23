@@ -146,7 +146,7 @@ class ArtsController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-
+            $this->addFlash('success', 'The comment has been posted successfully!');
             return $this->redirect($request->getUri());
         }
         return $this->render('arts/details.html.twig', [
@@ -189,12 +189,9 @@ class ArtsController extends Controller {
  * @Route("/contact/{id}", name="Send buy message")
  * 
  */
-public function contactAction(Request $request)
+public function contactAction(Request $request, $id=null)
     {
-        // Create the form according to the FormType created previously.
-        // And give the proper parameters
         $form = $this->createForm('AppBundle\Form\ContactType',null,array(
-            // To set the action use $this->generateUrl('route_identifier')
             'action' => $this->generateUrl('Contact us'),
             'method' => 'POST'
         ));
@@ -205,20 +202,18 @@ public function contactAction(Request $request)
 
             if($form->isValid()){
                 // Send mail
-                if($this->sendEmail($form->getData())){
-
-                    // Everything OK, redirect to wherever you want ! :
-                    
-                    return $this->redirectToRoute('Contact');
-                }else{
-                    // An error ocurred, handle
-                    var_dump("Errooooor :(");
+                if($this->sendEmail($form->getData())){ 
+                  $this->addFlash('success', 'Message is sent!');
+                  return $this->redirectToRoute('Contact');
+                } else {
+                    $this->addFlash('error', 'Message not sent!');
                 }
             }
         }
 
         return $this->render('contact/contacting.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'id' => $id
         ));
     }
 
