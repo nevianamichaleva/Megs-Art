@@ -1034,6 +1034,7 @@ h2.title a {
     position: relative;
     background: url(../images/comment-arrow.png) bottom left repeat-x;
     margin-bottom: 2.083em;
+   
 }
 .comment-border {
     border-top: 0.083em solid #f0f0f0;

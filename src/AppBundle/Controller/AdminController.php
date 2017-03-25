@@ -112,7 +112,9 @@ class AdminController extends Controller
                 
         $entityManager->remove($art);
         if ($commentsById) {
-            $entityManager->remove($commentsById);
+            foreach ($commentsById as $value){
+            $entityManager->remove($value);
+            }
         }
         $entityManager->flush();
         $this->addFlash('success', 'Картината и коментарите към нея са изтрити');

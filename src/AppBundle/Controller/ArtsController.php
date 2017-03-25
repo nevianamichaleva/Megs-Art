@@ -165,7 +165,7 @@ class ArtsController extends Controller {
         $comments = $em->getRepository('AppBundle:Comments')
                 ->getComments();
 
-        return $this->render('Form/_footer.html.twig', array(
+        return $this->render('form/_footer.html.twig', array(
                     'arts' => $arts,
                     'comments' => $comments,
         ));
@@ -179,7 +179,7 @@ class ArtsController extends Controller {
         $comments = $em->getRepository('AppBundle:Comments')
                 ->getComments();
 
-        return $this->render('Form/_rightSide.html.twig', array(
+        return $this->render('form/_rightSide.html.twig', array(
                     'arts' => $arts,
                     'comments' => $comments,
         ));

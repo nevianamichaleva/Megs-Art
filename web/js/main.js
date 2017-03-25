@@ -49,4 +49,9 @@ $(document).ready(function () {
             $("#nav-mobile ul").append($submenu);
         }
     });
+    
+//    var conHeight = $(".note-img").height();
+//    var imgHeight = $(".note-img img").height();
+//    var gap = (imgHeight - conHeight)/2;
+//    $(".note-img img").css("margin-top",-gap);
 });
