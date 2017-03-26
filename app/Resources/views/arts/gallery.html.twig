@@ -23,7 +23,7 @@
         <div class="post">
             <h2 class="title"><a href="#">{{art.artTitle}}</a></h2>
             <p class="meta-info">Posted by <a>Miglena Stoyanova</a> on {{art.artDate |date("d/m/Y")}} in {{art.artCategory}}
-                | <a href="details/{{art.id}}/#comments">Comment</a>
+                | <a href="details/{{art.id}}#comments">Comment</a>
             <div class="post-thumbnail">
                 <a href="details/{{art.id}}">
                     <img src="{{asset('uploads/arts/')}}{{art.artImage}}" class="post-thumb" alt="{{art.artTitle}}" width="200"> 
