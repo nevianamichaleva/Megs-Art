@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Arts;
@@ -11,47 +12,47 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
+
 //use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     /**
      * @Route("/administration/paintings", name="Administration paintings")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function listAction()
-    {
+    public function listAction() {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $arts = $this->getDoctrine()
                 ->getRepository('AppBundle:Arts')
                 ->findAll();
-        $pageTitle='Paintings list';
-        $pageDesc='List of all paintings';
+        $pageTitle = 'Paintings list';
+        $pageDesc = 'List of all paintings';
         return $this->render('admin/list.html.twig', [
                     'arts' => $arts,
-                    'pageTitle'=>$pageTitle,
-                    'pageDesc'=>$pageDesc,
+                    'pageTitle' => $pageTitle,
+                    'pageDesc' => $pageDesc,
         ]);
     }
-    
+
     /**
      * @Route("/administration/create", name="Create painting")
      * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function createAction(Request $request) {
-        
+
         $art = new Arts;
         $form = $this->createForm(ArtType::class, $art);
-               /* ->add('saveAndCreateNew', SubmitType::class);*/
+        /* ->add('saveAndCreateNew', SubmitType::class); */
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
-             
+
             //Get Data
             $artTitleimage = $art->getArtTitleimage();
-            
+
             //echo '<pre>', print_r($artTitleimage, 1), '</pre>';
             $artImage = $art->getArtImage();
             //echo '<pre>', print_r($artImage, 1), '</pre>';
@@ -77,19 +78,19 @@ class AdminController extends Controller
             $em->persist($art);
             $em->flush();
             $this->addFlash('success', 'Картината е добавена!');
-            /*if ($form->get('saveAndCreateNew')->isClicked()) {
-                return $this->redirectToRoute('Create painting');
-            }*/
+            /* if ($form->get('saveAndCreateNew')->isClicked()) {
+              return $this->redirectToRoute('Create painting');
+              } */
             return $this->redirectToRoute('Gallery');
         }
-        $pageTitle='Create new painting';
-        $pageDesc='Please fill out required fields';
+        $pageTitle = 'Create new painting';
+        $pageDesc = 'Please fill out required fields';
         $page = 'Create';
         return $this->render('arts/create.html.twig', [
                     'form' => $form->createView(),
-                    'pageTitle'=> $pageTitle,
-                    'pageDesc'=> $pageDesc,
-                    'page'=>$page
+                    'pageTitle' => $pageTitle,
+                    'pageDesc' => $pageDesc,
+                    'page' => $page
         ]);
     }
 
@@ -106,14 +107,14 @@ class AdminController extends Controller
                 FROM AppBundle\Entity\Comments c
                 JOIN c.userId u
                 JOIN c.artId a
-                WHERE c.artId = $id"); 
- 
+                WHERE c.artId = $id");
+
         $commentsById = $queryComments->getResult();
-                
+
         $entityManager->remove($art);
         if ($commentsById) {
-            foreach ($commentsById as $value){
-            $entityManager->remove($value);
+            foreach ($commentsById as $value) {
+                $entityManager->remove($value);
             }
         }
         $entityManager->flush();
@@ -132,114 +133,111 @@ class AdminController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(ArtType::class, $art);
-        $artTitleimage =  $art->getArtTitleimage();
+        $artTitleimage = $art->getArtTitleimage();
         $artImage = $art->getArtImage();
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          
-        if ($form['artTitleimage']->getData()!=null) {
-            $first = $art->getArtTitleimage();
-            $artTitleimage = md5(uniqid()) . '.' . $first->guessExtension();  
-            $first->move(
-                    $this->getParameter('artImages_directory'), $artTitleimage
-            );
-            
-        } 
-        
-        if ($form['artImage']->getData()!=null){
-            $second = $art->getArtImage();
-            $artImage = md5(uniqid()) . '.' . $second->guessExtension();
-            $second->move(
-                    $this->getParameter('artImages_directory'), $artImage
-            );
-             
-        } 
-        
+
+            if ($form['artTitleimage']->getData() != null) {
+                $first = $art->getArtTitleimage();
+                $artTitleimage = md5(uniqid()) . '.' . $first->guessExtension();
+                $first->move(
+                        $this->getParameter('artImages_directory'), $artTitleimage
+                );
+            }
+
+            if ($form['artImage']->getData() != null) {
+                $second = $art->getArtImage();
+                $artImage = md5(uniqid()) . '.' . $second->guessExtension();
+                $second->move(
+                        $this->getParameter('artImages_directory'), $artImage
+                );
+            }
+
             $art->setArtTitleimage($artTitleimage);
-           $art->setArtImage($artImage);
+            $art->setArtImage($artImage);
             $entityManager->flush();
 
             $this->addFlash('success', 'Картината е редактирана');
 
             return $this->redirectToRoute('Edit painting', ['id' => $art->getId()]);
         }
-        $pageTitle='Edit painting';
-        $pageDesc='Just change the fields for editing';
+        $pageTitle = 'Edit painting';
+        $pageDesc = 'Just change the fields for editing';
         $page = 'Edit';
         return $this->render('arts/create.html.twig', [
-            'art' => $art,
-            'form' => $form->createView(),
-            'pageTitle'=>$pageTitle,
-            'pageDesc'=>$pageDesc,
-            'page'=> $page
+                    'art' => $art,
+                    'form' => $form->createView(),
+                    'pageTitle' => $pageTitle,
+                    'pageDesc' => $pageDesc,
+                    'page' => $page
         ]);
     }
-    
-     /**
+
+    /**
      * @Route("/administration/users", name="Administration users")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function listUsersAction()
-    {
+    public function listUsersAction() {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $users = $this->getDoctrine()
                 ->getRepository('AppBundle:Users')
                 ->findAll();
-        $pageTitle='Users list';
-        $pageDesc='List of all registered users';
+        $pageTitle = 'Users list';
+        $pageDesc = 'List of all registered users';
         return $this->render('admin/users.html.twig', [
                     'users' => $users,
-                    'pageTitle'=>$pageTitle,
-                    'pageDesc'=>$pageDesc,
+                    'pageTitle' => $pageTitle,
+                    'pageDesc' => $pageDesc,
         ]);
     }
-    
+
     /**
      * @Route("/administration/comments", name="Administration comments")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function listCommentsAction()
-    {
+    public function listCommentsAction() {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $comments = $this->getDoctrine()
                 ->getRepository('AppBundle:Comments')
                 ->findAll();
-        $pageTitle='Comments list';
-        $pageDesc='List of all comments';
+        $pageTitle = 'Comments list';
+        $pageDesc = 'List of all comments';
         return $this->render('admin/comments.html.twig', [
                     'comments' => $comments,
-                    'pageTitle'=>$pageTitle,
-                    'pageDesc'=>$pageDesc,
+                    'pageTitle' => $pageTitle,
+                    'pageDesc' => $pageDesc,
         ]);
     }
-    
+
     /**
      * @Route("/administration/comments/delete/{id}", name="Delete comment")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteCommentAction(Comments $comment, Request $request) {
         $entityManager = $this->getDoctrine()->getManager();
-                
+
         $entityManager->remove($comment);
         $entityManager->flush();
         $this->addFlash('success', 'Коментарът е изтрит');
 
         return $this->redirectToRoute('Administration comments');
     }
-    
+
     /**
      * @Route("/administration/users/delete/{id}", name="Delete user")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteUserAction(Users $user, Request $request) {
         $entityManager = $this->getDoctrine()->getManager();
-                
+
         $entityManager->remove($user);
         $entityManager->flush();
         $this->addFlash('success', 'Потребителят е изтрит');
 
         return $this->redirectToRoute('Administration users');
     }
+
 }

@@ -44,7 +44,7 @@ class ArtsController extends Controller {
                     'lastSix' => $lastSix,
         ]);
     }
-    
+
     /**
      * @Route("/about", name="About")
      */
@@ -184,14 +184,14 @@ class ArtsController extends Controller {
                     'comments' => $comments,
         ));
     }
+
     /**
- * @Route("/contact", name="Contact us")
- * @Route("/contact/{id}", name="Send buy message")
- * 
- */
-public function contactAction(Request $request, $id=null)
-    {
-        $form = $this->createForm('AppBundle\Form\ContactType',null,array(
+     * @Route("/contact", name="Contact us")
+     * @Route("/contact/{id}", name="Send buy message")
+     * 
+     */
+    public function contactAction(Request $request, $id = null) {
+        $form = $this->createForm('AppBundle\Form\ContactType', null, array(
             'action' => $this->generateUrl('Contact us'),
             'method' => 'POST'
         ));
@@ -200,11 +200,11 @@ public function contactAction(Request $request, $id=null)
             // Refill the fields in case the form is not valid.
             $form->handleRequest($request);
 
-            if($form->isValid()){
+            if ($form->isValid()) {
                 // Send mail
-                if($this->sendEmail($form->getData())){ 
-                  $this->addFlash('success', 'Message is sent!');
-                  return $this->redirectToRoute('Contact');
+                if ($this->sendEmail($form->getData())) {
+                    $this->addFlash('success', 'Message is sent!');
+                    return $this->redirectToRoute('Contact');
                 } else {
                     $this->addFlash('error', 'Message not sent!');
                 }
@@ -212,32 +212,29 @@ public function contactAction(Request $request, $id=null)
         }
 
         return $this->render('contact/contacting.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $id
+                    'form' => $form->createView(),
+                    'id' => $id
         ));
     }
 
-    private function sendEmail($data){
+    private function sendEmail($data) {
         $myappContactMail = '';
         $myappContactPassword = '';
-        
-        // In this case we'll use the ZOHO mail services.
-        // If your service is another, then read the following article to know which smpt code to use and which port
-        // http://ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
-        $transport = \Swift_SmtpTransport::newInstance('smtp.zoho.com', 465,'ssl')
-            ->setUsername($myappContactMail)
-            ->setPassword($myappContactPassword);
+
+        $transport = \Swift_SmtpTransport::newInstance('smtp.zoho.com', 465, 'ssl')
+                ->setUsername($myappContactMail)
+                ->setPassword($myappContactPassword);
 
         $mailer = \Swift_Mailer::newInstance($transport);
-        
-        $message = \Swift_Message::newInstance("Our Code World Contact Form ". $data["subject"])
-        ->setFrom(array($myappContactMail => "Message by ".$data["name"]))
-        ->setTo(array(
-            $myappContactMail => $myappContactMail
-        ))
-        ->setBody($data["message"]."<br>ContactMail :".$data["email"]);
-        
+
+        $message = \Swift_Message::newInstance("Our Code World Contact Form " . $data["subject"])
+                ->setFrom(array($myappContactMail => "Message by " . $data["name"]))
+                ->setTo(array(
+                    $myappContactMail => $myappContactMail
+                ))
+                ->setBody($data["message"] . "<br>ContactMail :" . $data["email"]);
+
         return $mailer->send($message);
     }
-}
 
+}

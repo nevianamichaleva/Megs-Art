@@ -42,7 +42,7 @@ class UserController extends Controller {
         $pageTitle = 'User registration';
         $pageDesc = 'Please register by filling out required fields';
         return $this->render(
-                        'registration/register.html.twig', array('form' => $form->createView(),
+                    'registration/register.html.twig', array('form' => $form->createView(),
                     'pageTitle' => $pageTitle,
                     'pageDesc' => $pageDesc)
         );
